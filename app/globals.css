@@ -1,26 +1,171 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand colors from Figma branding template */
+  --background: #E2E8F0; /* Light mode background - Slate 200 */
+  --foreground: #0f172a; /* Dark Slate 900 */
+  --muted: #cbd5e1; /* Slate 300 */
+  --muted-foreground: #64748b; /* Slate 500 */
+  --border: #94a3b8; /* Slate 400 */
+  --input: #f1f5f9; /* Slate 100 */
+  --secondary: #64748b; /* Slate 500 */
+
+  /* Brand accent colors */
+  --indigo: #6366f1; /* Primary Indigo */
+  --gold: #d4a574; /* Warm Gold */
+  --sunset: #e8956f; /* Warm Sunset */
+  --accent: #6366f1; /* Primary is Indigo */
+  --accent-foreground: #ffffff;
+
+  /* UI colors */
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --primary: #6366f1; /* Indigo */
+  --primary-foreground: #ffffff;
+  --success: #10b981; /* Success Green */
+  --warning: #f59e0b; /* Warning Orange */
+  --destructive: #ef4444; /* Error Red */
+  --destructive-foreground: #ffffff;
+  --ring: #6366f1; /* Indigo */
+  --radius: 0.75rem;
 }
 
 @theme inline {
+  /* Color palette */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-ring: var(--ring);
+
+  /* Brand accent colors */
+  --color-indigo: var(--indigo);
+  --color-gold: var(--gold);
+  --color-sunset: var(--sunset);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+
+  /* Border radius from Figma */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1.25rem; /* 20px */
+  --radius-2xl: 1.5625rem; /* 25px */
+  --radius-full: 9999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark mode - with brand colors */
+.dark {
+  --background: #0f172a; /* Dark Slate from brand */
+  --foreground: #f1f5f9; /* Slate 100 */
+  --muted: #334155; /* Slate 700 */
+  --muted-foreground: #94a3b8; /* Slate 400 */
+  --border: #475569; /* Slate 600 */
+  --input: #1e293b; /* Slate 800 */
+  --card: #1e293b; /* Slate 800 */
+  --card-foreground: #f1f5f9;
+  --primary: #6366f1; /* Keep indigo */
+  --primary-foreground: #ffffff;
+
+  /* Warmer accents for dark mode - slightly dimmed */
+  --indigo: #818cf8; /* Lighter indigo for dark mode */
+  --gold: #d4a574; /* Keep brand gold */
+  --sunset: #e8956f; /* Keep brand sunset */
+  --accent: #818cf8;
+  --ring: #818cf8;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
+  background: #0a0a0a; /* Black sides for mobile frame */
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  /* Mobile-only: center and constrain to mobile width */
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Mobile container - all content constrained to 393px */
+body > * {
+  width: 100%;
+  max-width: 393px;
+  position: relative;
+  background: var(--background);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  background: #0a0a0a; /* Black background for mobile frame effect */
+}
+
+/* Mobile-first touch targets (minimum 44x44px) */
+button,
+a,
+input[type="checkbox"],
+input[type="radio"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Input focus states with warm accent */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
 }
