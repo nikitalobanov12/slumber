@@ -151,3 +151,38 @@ export const mockWindDownActivities: WindDownActivity[] = [
 // Last night's session (most recent)
 export const lastNightSession =
   mockSleepSessions[mockSleepSessions.length - 1];
+
+export const mockSleepArticles = [
+  {
+    id: "1",
+    title: "The Science of Sleep Cycles",
+    excerpt: "Understanding your sleep cycles can help you wake up feeling more refreshed. Learn how REM and deep sleep stages affect your rest.",
+    category: "science" as const,
+    readTime: 5,
+    imageColor: "bg-gradient-to-br from-indigo/20 to-purple/20",
+  },
+  {
+    id: "2",
+    title: "5 Evening Habits for Better Sleep",
+    excerpt: "Small changes to your evening routine can dramatically improve sleep quality. Discover proven techniques to wind down effectively.",
+    category: "habits" as const,
+    readTime: 4,
+    imageColor: "bg-gradient-to-br from-blue/20 to-cyan/20",
+  },
+  {
+    id: "3",
+    title: "How Light Affects Your Sleep",
+    excerpt: "Blue light from screens can disrupt your natural sleep rhythm. Learn how to manage light exposure for optimal rest.",
+    category: "tips" as const,
+    readTime: 3,
+    imageColor: "bg-gradient-to-br from-amber/20 to-orange/20",
+  },
+  {
+    id: "4",
+    title: "The Connection Between Exercise and Sleep",
+    excerpt: "Regular physical activity can significantly improve sleep quality, but timing matters. Find out when to work out for best results.",
+    category: "health" as const,
+    readTime: 6,
+    imageColor: "bg-gradient-to-br from-green/20 to-emerald/20",
+  },
+];

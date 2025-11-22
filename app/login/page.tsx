@@ -71,6 +71,7 @@ export default function LoginPage() {
             fullWidth
             variant="outline"
             className="gap-2"
+            onClick={() => router.push("/dashboard")}
           >
             <div className="w-5 h-5 bg-muted rounded"></div>
             Continue with Google

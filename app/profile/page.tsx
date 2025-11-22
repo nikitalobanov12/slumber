@@ -36,7 +36,7 @@ export default function ProfilePage() {
         <Card className="mt-8 p-6 space-y-1">
           <h3 className="text-sm font-semibold mb-4">Account</h3>
 
-          <button className="w-full flex items-center justify-between p-4 -mx-4 hover:bg-muted rounded-lg transition-colors">
+          <button onClick={() => window.location.href = "/onboarding/profile"} className="w-full flex items-center justify-between p-4 -mx-4 hover:bg-muted rounded-lg transition-colors">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
                 <User className="w-4 h-4" />
@@ -46,7 +46,7 @@ export default function ProfilePage() {
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </button>
 
-          <button className="w-full flex items-center justify-between p-4 -mx-4 hover:bg-muted rounded-lg transition-colors">
+          <button onClick={() => window.location.href = "/goals"} className="w-full flex items-center justify-between p-4 -mx-4 hover:bg-muted rounded-lg transition-colors">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
                 <Settings className="w-4 h-4" />
@@ -56,7 +56,7 @@ export default function ProfilePage() {
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </button>
 
-          <button className="w-full flex items-center justify-between p-4 -mx-4 hover:bg-muted rounded-lg transition-colors">
+          <button onClick={() => alert("Notifications settings would be here in a real app")} className="w-full flex items-center justify-between p-4 -mx-4 hover:bg-muted rounded-lg transition-colors">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
                 <Bell className="w-4 h-4" />
@@ -81,7 +81,7 @@ export default function ProfilePage() {
             <Switch checked={theme === "dark"} onCheckedChange={toggleTheme} />
           </button>
 
-          <button className="w-full flex items-center justify-between p-4 -mx-4 hover:bg-muted rounded-lg transition-colors text-destructive">
+          <button onClick={() => window.location.href = "/login"} className="w-full flex items-center justify-between p-4 -mx-4 hover:bg-muted rounded-lg transition-colors text-destructive">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-destructive/10 flex items-center justify-center">
                 <LogOut className="w-4 h-4 text-destructive" />

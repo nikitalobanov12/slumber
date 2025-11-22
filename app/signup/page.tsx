@@ -83,6 +83,7 @@ export default function SignupPage() {
             fullWidth
             variant="outline"
             className="gap-2"
+            onClick={() => router.push("/onboarding/profile")}
           >
             <div className="w-5 h-5 bg-muted rounded"></div>
             Continue with Google

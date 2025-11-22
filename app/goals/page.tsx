@@ -70,7 +70,7 @@ export default function GoalsPage() {
             <h3 className="font-semibold">Suggested Schedule</h3>
 
             <div className="space-y-3">
-              <button className="w-full flex items-center justify-between p-4 hover:bg-muted rounded-lg transition-colors">
+              <button onClick={() => alert("Bedtime settings would allow you to adjust your bedtime reminder")} className="w-full flex items-center justify-between p-4 hover:bg-muted rounded-lg transition-colors">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-indigo/10 flex items-center justify-center">
                     <Moon className="w-4 h-4 text-indigo" />
@@ -80,7 +80,7 @@ export default function GoalsPage() {
                 <ChevronRight className="w-4 h-4 text-muted-foreground" />
               </button>
 
-              <button className="w-full flex items-center justify-between p-4 hover:bg-muted rounded-lg transition-colors">
+              <button onClick={() => alert("Wake time settings would allow you to set your morning alarm")} className="w-full flex items-center justify-between p-4 hover:bg-muted rounded-lg transition-colors">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-indigo/10 flex items-center justify-center">
                     <Sun className="w-4 h-4 text-indigo" />

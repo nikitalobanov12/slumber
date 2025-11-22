@@ -6,8 +6,8 @@ import { StatusBar } from "@/components/layout/status-bar";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { PageContainer } from "@/components/layout/page-container";
 import { SleepBarChart } from "@/components/features/sleep-bar-chart";
-import { Clock, TrendingUp } from "lucide-react";
-import { getWeeklyData, getMonthlyData, getYearlyData } from "@/lib/mock-data";
+import { Clock, TrendingUp, BookOpen, ArrowRight } from "lucide-react";
+import { getWeeklyData, getMonthlyData, getYearlyData, mockSleepArticles } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 type Period = "week" | "month" | "year";
@@ -56,6 +56,21 @@ export default function InsightsPage() {
     }
   };
 
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "science":
+        return "text-purple";
+      case "habits":
+        return "text-blue";
+      case "tips":
+        return "text-amber";
+      case "health":
+        return "text-green";
+      default:
+        return "text-indigo";
+    }
+  };
+
   return (
     <div className="min-h-screen pb-20">
       <PageContainer withStatusBar withNav className="py-8">
@@ -63,20 +78,23 @@ export default function InsightsPage() {
 
         {/* Header */}
         <div className="mt-8">
-          <h1 className="text-xl font-bold text-center">Sleep Insights</h1>
+          <h1 className="text-xl font-bold">Sleep Insights</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Track your progress and learn more
+          </p>
         </div>
 
         {/* Period Tabs */}
-        <div className="mt-6 flex gap-2 justify-center">
+        <div className="mt-6 flex gap-2">
           {(["week", "month", "year"] as Period[]).map((p) => (
             <button
               key={p}
               onClick={() => setPeriod(p)}
               className={cn(
-                "px-6 py-2 rounded-full text-sm font-medium transition-colors capitalize",
+                "px-5 py-1.5 rounded-full text-xs font-medium transition-colors capitalize",
                 period === p
                   ? "bg-indigo text-white"
-                  : "bg-background border-2 border-border text-foreground hover:border-indigo/50"
+                  : "bg-muted text-foreground hover:bg-muted/70"
               )}
             >
               {p}
@@ -85,42 +103,78 @@ export default function InsightsPage() {
         </div>
 
         {/* Chart Card */}
-        <Card className="mt-6 p-6">
-          <h2 className="text-sm font-semibold text-center mb-4">
+        <Card className="mt-4 p-5">
+          <h2 className="text-sm font-semibold mb-4">
             {getChartTitle()}
           </h2>
           <SleepBarChart data={chartData} />
         </Card>
 
-        {/* Stats Cards */}
-        <div className="mt-6 grid grid-cols-2 gap-4">
-          <Card className="p-6 space-y-4">
-            <div className="w-8 h-8 rounded-lg bg-indigo/10 flex items-center justify-center">
+        {/* Stats Summary - Horizontal Layout */}
+        <div className="mt-4 flex gap-3">
+          <Card className="flex-1 p-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-indigo/10 flex items-center justify-center flex-shrink-0">
               <Clock className="w-5 h-5 text-indigo" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-medium">
-                Average Sleep
-              </p>
-              <p className="text-2xl font-bold mt-2">
+              <p className="text-xs text-muted-foreground">Avg Sleep</p>
+              <p className="text-lg font-bold">
                 {formatDuration(Math.round(periodStats.averageDuration))}
               </p>
             </div>
           </Card>
 
-          <Card className="p-6 space-y-4">
-            <div className="w-8 h-8 rounded-lg bg-indigo/10 flex items-center justify-center">
+          <Card className="flex-1 p-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-indigo/10 flex items-center justify-center flex-shrink-0">
               <TrendingUp className="w-5 h-5 text-indigo" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-medium">
-                Sleep Score
-              </p>
-              <p className="text-2xl font-bold mt-2">
+              <p className="text-xs text-muted-foreground">Avg Score</p>
+              <p className="text-lg font-bold">
                 {Math.round(periodStats.averageScore)}
               </p>
             </div>
           </Card>
+        </div>
+
+        {/* Learning Section */}
+        <div className="mt-8 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base font-bold">Learn About Sleep</h2>
+            <BookOpen className="w-5 h-5 text-muted-foreground" />
+          </div>
+
+          {/* Article Cards */}
+          <div className="space-y-3">
+            {mockSleepArticles.map((article) => (
+              <Card
+                key={article.id}
+                className="p-4 hover:shadow-md transition-shadow cursor-pointer"
+                onClick={() => alert("Article detail page would open here")}
+              >
+                <div className="flex gap-4">
+                  <div className={cn("w-20 h-20 rounded-lg flex-shrink-0", article.imageColor)} />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className={cn("text-xs font-semibold capitalize", getCategoryColor(article.category))}>
+                        {article.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        · {article.readTime} min read
+                      </span>
+                    </div>
+                    <h3 className="font-semibold text-sm mb-1 line-clamp-1">
+                      {article.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground line-clamp-2">
+                      {article.excerpt}
+                    </p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-1" />
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
       </PageContainer>
 

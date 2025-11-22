@@ -59,5 +59,15 @@ export interface SleepStats {
   }[];
 }
 
+// Article types
+export interface SleepArticle {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: "tips" | "science" | "habits" | "health";
+  readTime: number; // minutes
+  imageColor: string;
+}
+
 // Navigation types
 export type NavItem = "home" | "insights" | "goals" | "profile";
