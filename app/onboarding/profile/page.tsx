@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { StatusBar } from "@/components/layout/status-bar";
 import { PageContainer } from "@/components/layout/page-container";
@@ -14,6 +15,8 @@ export default function SleepProfilePage() {
   const [bedtime, setBedtime] = useState(23); // 23:00 (11 PM)
   const [wakeTime, setWakeTime] = useState(7); // 07:00 (7 AM)
   const [sleepIssues, setSleepIssues] = useState<string[]>([]);
+  const [otherIssue, setOtherIssue] = useState("");
+  const [showOtherInput, setShowOtherInput] = useState(false);
 
   const formatTime = (hour: number) => {
     const isPM = hour >= 12;
@@ -29,8 +32,15 @@ export default function SleepProfilePage() {
     );
   };
 
+  const toggleOther = () => {
+    setShowOtherInput(!showOtherInput);
+    if (showOtherInput) {
+      setOtherIssue("");
+    }
+  };
+
   const handleContinue = () => {
-    // In a real app, save this data
+    // In a real app, save this data (including otherIssue if filled)
     router.push("/dashboard");
   };
 
@@ -102,6 +112,26 @@ export default function SleepProfilePage() {
                     onChange={() => toggleIssue(issue)}
                   />
                 ))}
+                
+                {/* Other option */}
+                <Checkbox
+                  label="Other"
+                  checked={showOtherInput}
+                  onChange={toggleOther}
+                />
+                
+                {/* Other text input */}
+                {showOtherInput && (
+                  <div className="ml-8 mt-2">
+                    <Input
+                      type="text"
+                      placeholder="Please specify..."
+                      value={otherIssue}
+                      onChange={(e) => setOtherIssue(e.target.value)}
+                      className="h-[45px]"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>

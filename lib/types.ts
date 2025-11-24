@@ -35,6 +35,11 @@ export const SLEEP_ISSUES = [
   "Difficulty falling asleep",
   "Waking up frequently",
   "Not feeling rested",
+  "Snoring or sleep apnea",
+  "Racing thoughts at night",
+  "Stress or anxiety",
+  "Irregular sleep schedule",
+  "Environmental disturbances",
 ] as const;
 
 // Wind-down routine types
